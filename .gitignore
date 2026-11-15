@@ -15,8 +15,8 @@ env/
 # Environment variables
 .env
 
-# Submission ZIP archive
-ConnectTel_Churn_Submission.zip
+# Submission and archive files
+*.zip
 
 # OS generated files
 .DS_Store

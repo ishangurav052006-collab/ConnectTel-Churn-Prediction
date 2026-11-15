@@ -116,8 +116,7 @@ if "pred_prob" not in df.columns:
 # SIDEBAR
 # ==============================================================================
 with st.sidebar:
-    st.image("https://img.icons8.com/color/96/000000/satellite-antenna.png", width=70)
-    st.title("ConnectTel AI")
+    st.title("📡 ConnectTel AI")
     st.markdown("**Enterprise Churn Retention Platform**")
     st.markdown("---")
     st.markdown("### Operational Settings")
@@ -248,9 +247,9 @@ with tab1:
             st.dataframe(comp_df.style.format("{:.4f}").highlight_max(subset=["ROC-AUC", "PR-AUC", "Recall", "F1-Score"], color="#d4edda"), use_container_width=True)
         
         st.markdown("#### Operational Threshold Tradeoff")
-        st.write(
-            "• **Default 0.50 Threshold**: 79.68% Recall, 52.28% Precision. Captures 298 churners, misses 76.\\n"
-            "• **Recall-Optimized 0.32 Threshold**: **92.51% Recall**, 44.42% Precision. Captures **346 churners**, misses only **28**."
+        st.markdown(
+            "- **Default 0.50 Threshold**: 79.68% Recall, 52.28% Precision. Captures 298 churners, misses 76.\n"
+            "- **Recall-Optimized 0.32 Threshold**: **92.51% Recall**, 44.42% Precision. Captures **346 churners**, misses only **28**."
         )
         st.info("💡 **Leadership Takeaway**: Shifting to t = 0.32 enables the retention taskforce to capture 48 more churners in the test cohort alone, preserving an extra ~₹42,000 in recurring annual revenue.")
 
@@ -284,11 +283,11 @@ with tab2:
     mcol1, mcol2, mcol3, mcol4, mcol5 = st.columns(5)
     with mcol1:
         if cust_prob >= 0.65:
-            st.error(f"**Predicted Churn Risk**\\n# {cust_prob:.1%}")
+            st.error(f"🚨 **High Risk**: {cust_prob:.1%}")
         elif cust_prob >= 0.35:
-            st.warning(f"**Predicted Churn Risk**\\n# {cust_prob:.1%}")
+            st.warning(f"⚠️ **Elevated Risk**: {cust_prob:.1%}")
         else:
-            st.success(f"**Predicted Churn Risk**\\n# {cust_prob:.1%}")
+            st.success(f"✅ **Low Risk**: {cust_prob:.1%}")
     with mcol2:
         st.metric("Contract Type", cust_row["Contract"])
     with mcol3:

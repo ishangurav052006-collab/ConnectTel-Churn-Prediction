@@ -42,7 +42,7 @@ def should_exclude(rel_path: str) -> bool:
     for part in parts:
         if part in EXCLUDE_PATTERNS:
             return True
-        if part.endswith(".pyc") or part.endswith(".pyo"):
+        if part.endswith(".pyc") or part.endswith(".pyo") or part.endswith(".zip"):
             return True
     return False
 
