@@ -1,0 +1,39 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environments
+.venv/
+venv/
+ENV/
+env/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Environment variables
+.env
+
+# Submission ZIP archive
+ConnectTel_Churn_Submission.zip
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Explicitly track required deployment directories and files
+!data/
+!data/**
+!models/
+!models/**
+!outputs/
+!outputs/**
+!src/
+!src/**
+!notebooks/
+!notebooks/**
+!app.py
+!ConnectTel_Churn_Analysis.ipynb
+!README.md
+!requirements.txt

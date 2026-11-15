@@ -1,0 +1,323 @@
+{
+    "project": "ConnectTel Customer Churn Machine Learning Pipeline",
+    "dataset_summary": {
+        "total_records": 7043,
+        "total_features": 24,
+        "churn_distribution": {
+            "No": 5174,
+            "Yes": 1869,
+            "churn_rate_pct": 26.536987079369588
+        }
+    },
+    "hypothesis_testing": {
+        "chi2_fiber_vs_dsl": {
+            "test_name": "Chi-Square Test of Independence (Fiber Optic vs DSL Churn)",
+            "null_hypothesis": "Churn rate is independent of internet service type (Fiber Optic vs DSL).",
+            "alternative_hypothesis": "Fiber Optic users have a significantly different (higher) churn rate than DSL users.",
+            "chi2_statistic": 328.26345137397004,
+            "p_value": 2.2962170975696955e-73,
+            "degrees_of_freedom": 1,
+            "sample_sizes": {
+                "Fiber_optic_total": 3096,
+                "DSL_total": 2421
+            },
+            "churn_rates": {
+                "Fiber_optic": 0.4189276485788114,
+                "DSL": 0.1895910780669145
+            },
+            "significant": true,
+            "conclusion": "Reject H0 (p = 2.296e-73 < 0.05). Fiber Optic customers have a significantly higher churn rate (41.9%) compared to DSL customers (19.0%)."
+        },
+        "chi2_partner_vs_churn": {
+            "test_name": "Chi-Square Test of Independence (Partner vs Churn)",
+            "null_hypothesis": "Churn rate is independent of whether a customer has a partner.",
+            "alternative_hypothesis": "Customers with a partner have a significantly lower churn risk.",
+            "chi2_statistic": 158.7333820309922,
+            "p_value": 2.1399113440759935e-36,
+            "degrees_of_freedom": 1,
+            "sample_sizes": {
+                "Partner_Yes_total": 3402,
+                "Partner_No_total": 3641
+            },
+            "churn_rates": {
+                "Partner_Yes": 0.1966490299823633,
+                "Partner_No": 0.32957978577313923
+            },
+            "significant": true,
+            "conclusion": "Reject H0 (p = 2.140e-36 < 0.05). Having a partner significantly reduces churn risk (churn rate: 19.7% for partnered vs 33.0% for unpartnered)."
+        },
+        "mann_whitney_monthly_charges": {
+            "test_name": "Mann-Whitney U Test (MonthlyCharges by Churn Status)",
+            "null_hypothesis": "Distribution of MonthlyCharges is identical between churned and retained customers.",
+            "alternative_hypothesis": "Churned customers have systematically higher MonthlyCharges than retained customers.",
+            "u_statistic": 6003125.5,
+            "p_value": 3.311627651988584e-54,
+            "medians": {
+                "Churn_Yes_median": 79.65,
+                "Churn_No_median": 64.42500000000001
+            },
+            "means": {
+                "Churn_Yes_mean": 74.44133226324237,
+                "Churn_No_mean": 61.26512369540008
+            },
+            "significant": true,
+            "conclusion": "Reject H0 (p = 3.312e-54 < 0.05). Customers who churn pay significantly higher monthly charges (median $79.65 vs $64.43)."
+        }
+    },
+    "logistic_regression": {
+        "top_10_churn_inducing_features_odds_ratio": [
+            {
+                "feature": "Contract_Month-to-month",
+                "coefficient": 0.7126813191051906,
+                "odds_ratio": 2.0394523564694476
+            },
+            {
+                "feature": "InternetService_Fiber optic",
+                "coefficient": 0.7055467793279986,
+                "odds_ratio": 2.024953585040176
+            },
+            {
+                "feature": "Tenure_Cohort_48m+",
+                "coefficient": 0.3213831186815298,
+                "odds_ratio": 1.3790338133157807
+            },
+            {
+                "feature": "ServiceCount",
+                "coefficient": 0.2675975387817636,
+                "odds_ratio": 1.3068210893569028
+            },
+            {
+                "feature": "OnlineSecurity_No",
+                "coefficient": 0.24682758616836997,
+                "odds_ratio": 1.2799584112188107
+            },
+            {
+                "feature": "PaymentMethod_Electronic check",
+                "coefficient": 0.2430566685838248,
+                "odds_ratio": 1.2751408824990385
+            },
+            {
+                "feature": "StreamingMovies_Yes",
+                "coefficient": 0.21260871247356936,
+                "odds_ratio": 1.2369005727772815
+            },
+            {
+                "feature": "TechSupport_No",
+                "coefficient": 0.20870812213886442,
+                "odds_ratio": 1.232085327612659
+            },
+            {
+                "feature": "StreamingTV_Yes",
+                "coefficient": 0.2015599911804485,
+                "odds_ratio": 1.2233096226498605
+            },
+            {
+                "feature": "TotalCharges",
+                "coefficient": 0.18610158305191468,
+                "odds_ratio": 1.2045446154811301
+            }
+        ],
+        "top_10_churn_protective_features_odds_ratio": [
+            {
+                "feature": "TechSupport_No internet service",
+                "coefficient": -0.2260191842655965,
+                "odds_ratio": 0.7977027981765343
+            },
+            {
+                "feature": "OnlineSecurity_No internet service",
+                "coefficient": -0.2260191842655965,
+                "odds_ratio": 0.7977027981765343
+            },
+            {
+                "feature": "OnlineBackup_No internet service",
+                "coefficient": -0.2260191842655965,
+                "odds_ratio": 0.7977027981765343
+            },
+            {
+                "feature": "DeviceProtection_No internet service",
+                "coefficient": -0.2260191842655965,
+                "odds_ratio": 0.7977027981765343
+            },
+            {
+                "feature": "PaperlessBilling_No",
+                "coefficient": -0.24943906415567554,
+                "odds_ratio": 0.7792377628935824
+            },
+            {
+                "feature": "Tenure_Cohort_12-24m",
+                "coefficient": -0.3588683212369935,
+                "odds_ratio": 0.6984663184772008
+            },
+            {
+                "feature": "InternetService_DSL",
+                "coefficient": -0.6305159900924092,
+                "odds_ratio": 0.5323170598022448
+            },
+            {
+                "feature": "MonthlyCharges",
+                "coefficient": -0.722710336266899,
+                "odds_ratio": 0.4854347798757607
+            },
+            {
+                "feature": "Contract_Two year",
+                "coefficient": -0.8348010706014475,
+                "odds_ratio": 0.4339608004080359
+            },
+            {
+                "feature": "tenure",
+                "coefficient": -1.0080868112182615,
+                "odds_ratio": 0.36491646623641677
+            }
+        ]
+    },
+    "xgboost_tuning": {
+        "best_hyperparameters": {
+            "learning_rate": 0.05,
+            "max_depth": 3,
+            "n_estimators": 100,
+            "subsample": 0.8
+        },
+        "best_5fold_cv_roc_auc": 0.8493311945249505
+    },
+    "model_performance_comparison": {
+        "Logistic Regression": {
+            "roc_auc": 0.841920483608463,
+            "pr_auc": 0.6358511397577588,
+            "accuracy": 0.7331440738112136,
+            "precision": 0.4983164983164983,
+            "recall": 0.7914438502673797,
+            "f1_score": 0.6115702479338843
+        },
+        "Random Forest": {
+            "roc_auc": 0.8222558061432742,
+            "pr_auc": 0.6083333962979355,
+            "accuracy": 0.7849538679914834,
+            "precision": 0.6195286195286195,
+            "recall": 0.4919786096256685,
+            "f1_score": 0.5484351713859911
+        },
+        "Tuned XGBoost": {
+            "roc_auc": 0.8458110516934046,
+            "pr_auc": 0.6589768819717957,
+            "accuracy": 0.7530163236337828,
+            "precision": 0.5228070175438596,
+            "recall": 0.7967914438502673,
+            "f1_score": 0.6313559322033898
+        }
+    },
+    "threshold_optimization": {
+        "default_threshold_0_50": {
+            "threshold": 0.5,
+            "confusion_matrix": [
+                [
+                    763,
+                    272
+                ],
+                [
+                    76,
+                    298
+                ]
+            ],
+            "true_negatives": 763,
+            "false_positives": 272,
+            "false_negatives": 76,
+            "true_positives": 298,
+            "precision": 0.5228070175438596,
+            "recall": 0.7967914438502673,
+            "f1_score": 0.6313559322033898,
+            "f2_score": 0.7212003872216844
+        },
+        "recall_optimized_threshold": {
+            "threshold": 0.3181818181818182,
+            "optimization_criterion": "Maximize F2 Score (emphasizing Churn Recall for proactive retention)",
+            "confusion_matrix": [
+                [
+                    602,
+                    433
+                ],
+                [
+                    28,
+                    346
+                ]
+            ],
+            "true_negatives": 602,
+            "false_positives": 433,
+            "false_negatives": 28,
+            "true_positives": 346,
+            "precision": 0.4441591784338896,
+            "recall": 0.9251336898395722,
+            "f1_score": 0.6001734605377277,
+            "f2_score": 0.7604395604395604
+        }
+    },
+    "shap_explainability": {
+        "driver_comparison": {
+            "question": "Is Month-to-Month contract status or Monthly Charges the #1 driver of churn?",
+            "Contract_Month_to_Month": {
+                "feature_name": "Contract_Month-to-month",
+                "mean_abs_shap": 0.5861871838569641,
+                "global_rank": 1
+            },
+            "MonthlyCharges": {
+                "feature_name": "MonthlyCharges",
+                "mean_abs_shap": 0.09533963352441788,
+                "global_rank": 11
+            },
+            "dominant_driver": "Contract_Month-to-month",
+            "ratio_mtm_to_mc": 6.148410226041228,
+            "verdict": "Contract_Month-to-month is the primary driver between the two (mean |SHAP|: 0.5862 vs 0.0953)."
+        },
+        "top_10_global_features": [
+            {
+                "feature": "Contract_Month-to-month",
+                "mean_abs_shap": 0.5861871838569641,
+                "rank": 1
+            },
+            {
+                "feature": "tenure",
+                "mean_abs_shap": 0.40977829694747925,
+                "rank": 2
+            },
+            {
+                "feature": "OnlineSecurity_No",
+                "mean_abs_shap": 0.2299325168132782,
+                "rank": 3
+            },
+            {
+                "feature": "HighRisk_Fiber_MTM_0",
+                "mean_abs_shap": 0.18120627105236053,
+                "rank": 4
+            },
+            {
+                "feature": "PaymentMethod_Electronic check",
+                "mean_abs_shap": 0.16904693841934204,
+                "rank": 5
+            },
+            {
+                "feature": "TechSupport_No",
+                "mean_abs_shap": 0.15943372249603271,
+                "rank": 6
+            },
+            {
+                "feature": "InternetService_Fiber optic",
+                "mean_abs_shap": 0.14199180901050568,
+                "rank": 7
+            },
+            {
+                "feature": "Contract_Two year",
+                "mean_abs_shap": 0.12860040366649628,
+                "rank": 8
+            },
+            {
+                "feature": "PaperlessBilling_No",
+                "mean_abs_shap": 0.10695663094520569,
+                "rank": 9
+            },
+            {
+                "feature": "TotalCharges_PerTenure",
+                "mean_abs_shap": 0.10362114757299423,
+                "rank": 10
+            }
+        ]
+    }
+}
